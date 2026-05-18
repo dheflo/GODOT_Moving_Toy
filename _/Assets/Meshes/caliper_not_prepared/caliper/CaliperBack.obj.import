@@ -4,14 +4,14 @@ importer="wavefront_obj"
 importer_version=1
 type="Mesh"
 uid="uid://c8vmcduwfqryh"
-path="res://.godot/imported/CaliperBack.obj-c88bcb58b912ed6a5fbfbe572b79cc00.mesh"
+path="res://.godot/imported/CaliperBack.obj-a5e029376c308ec0e8d467515aac21e6.mesh"
 
 [deps]
 
-files=["res://.godot/imported/CaliperBack.obj-c88bcb58b912ed6a5fbfbe572b79cc00.mesh"]
+files=["res://.godot/imported/CaliperBack.obj-a5e029376c308ec0e8d467515aac21e6.mesh"]
 
-source_file="res://_/Assets/Meshes/caliper_not_prepared/caliper/CaliperBack.obj"
-dest_files=["res://.godot/imported/CaliperBack.obj-c88bcb58b912ed6a5fbfbe572b79cc00.mesh", "res://.godot/imported/CaliperBack.obj-c88bcb58b912ed6a5fbfbe572b79cc00.mesh"]
+source_file="res://_/assets/meshes/caliper_not_prepared/caliper/CaliperBack.obj"
+dest_files=["res://.godot/imported/CaliperBack.obj-a5e029376c308ec0e8d467515aac21e6.mesh", "res://.godot/imported/CaliperBack.obj-a5e029376c308ec0e8d467515aac21e6.mesh"]
 
 [params]
 
