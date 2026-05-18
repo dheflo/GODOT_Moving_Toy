@@ -9,7 +9,7 @@
 [node name="KS_4036" type="Node3D" unique_id=1781070975]
 
 [node name="Resize" type="Node3D" parent="." unique_id=839295488]
-transform = Transform3D(0.066, 0, 0, 0, 0.05, 0, 0, 0, 0.094, -0.04395163, 0, 0.035293713)
+transform = Transform3D(-0.10237952, 0, -0.041346915, 0, 0.05, 0, -0.050144132, 0, 0.0844182, -0.04395163, 0, 0.035293713)
 
 [node name="Rigidbody" type="CharacterBody3D" parent="Resize" unique_id=941570093]
 

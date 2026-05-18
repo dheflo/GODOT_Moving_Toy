@@ -7,6 +7,8 @@ func _ready() -> void:
 		push_warning("Where is my f*king characterbody3D ?")
 
 func _process(delta: float) -> void:
-	var forward : Vector3 = character.global_position
-	forward = forward + Vector3(0,0,-1) * delta
-	character.global_position = forward
+	var position : Vector3 = character.global_position
+	var direction_forward : Vector3 = -character.basis.z
+	direction_forward.y = 0
+	position = position + direction_forward * delta
+	character.global_position = position
