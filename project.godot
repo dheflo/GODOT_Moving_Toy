@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="GODOT_Moving_Toy"
+run/main_scene="uid://dwrdxl1ubyl5i"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 

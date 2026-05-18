@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://dwrdxl1ubyl5i"]
 
+[ext_resource type="Script" uid="uid://clw0f4mon7nd1" path="res://_/scenes/ks4036_movement.gd" id="1_mufsq"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_3eq8w"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3eq8w"]
@@ -7,9 +9,9 @@
 [node name="KS_4036" type="Node3D" unique_id=1781070975]
 
 [node name="Resize" type="Node3D" parent="." unique_id=839295488]
-transform = Transform3D(0.066, 0, 0, 0, 0.05, 0, 0, 0, 0.094, 0, 0, 0)
+transform = Transform3D(0.066, 0, 0, 0, 0.05, 0, 0, 0, 0.094, -0.04395163, 0, 0.035293713)
 
-[node name="Rigidbody" type="RigidBody3D" parent="Resize" unique_id=712085081]
+[node name="Rigidbody" type="CharacterBody3D" parent="Resize" unique_id=941570093]
 
 [node name="Model" type="MeshInstance3D" parent="Resize/Rigidbody" unique_id=512385687]
 mesh = SubResource("BoxMesh_3eq8w")
@@ -17,3 +19,14 @@ mesh = SubResource("BoxMesh_3eq8w")
 [node name="Collider" type="CollisionShape3D" parent="Resize/Rigidbody" unique_id=696943983]
 shape = SubResource("BoxShape3D_3eq8w")
 debug_fill = false
+
+[node name="Scripts" type="Node" parent="Resize/Rigidbody" unique_id=1178922955]
+
+[node name="Movement" type="Node" parent="Resize/Rigidbody/Scripts" unique_id=1376230228 node_paths=PackedStringArray("character")]
+script = ExtResource("1_mufsq")
+character = NodePath("../..")
+
+[node name="Camera3D" type="Camera3D" parent="Resize" unique_id=1391171777]
+transform = Transform3D(15.151515, 0, 0, 0, 19.999998, 0, 0, 0, 10.638298, 0, 2.4976127, 3.0506425)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=977659]
