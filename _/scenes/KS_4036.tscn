@@ -1,39 +1,83 @@
 [gd_scene format=3 uid="uid://dwrdxl1ubyl5i"]
 
 [ext_resource type="Script" uid="uid://clw0f4mon7nd1" path="res://_/scenes/ks4036_movement.gd" id="1_mufsq"]
-[ext_resource type="Script" uid="uid://dnktxlhp5jwyd" path="res://_/scenes/inputs_ks4036_relay.gd" id="2_64m6p"]
+[ext_resource type="Script" uid="uid://c6o7iofo8wgbp" path="res://_/scenes/grip_car.gd" id="2_44abe"]
+[ext_resource type="Script" uid="uid://2j5itvvjda3p" path="res://_/scenes/color_change.gd" id="2_7307l"]
+[ext_resource type="Script" uid="uid://bih4y1pf800r5" path="res://_/scenes/xr_setup.gd" id="3_fejio"]
+[ext_resource type="Script" uid="uid://c5plgirpckkbh" path="res://_/scenes/xr_input_relay.gd" id="4_7cxde"]
+[ext_resource type="PackedScene" uid="uid://bnx4hithcij6y" path="res://addons/godot-xr-tools/hands/model/Hand_Glove_low_L.gltf" id="4_155ih"]
+[ext_resource type="PackedScene" uid="uid://csgsp0wuw8ucy" path="res://addons/godot-xr-tools/hands/model/Hand_Glove_low_R.gltf" id="5_7307l"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_155ih"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_7307l"]
+sky_material = SubResource("ProceduralSkyMaterial_155ih")
+
+[sub_resource type="Environment" id="Environment_44abe"]
+background_mode = 2
+sky = SubResource("Sky_7307l")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_155ih"]
+albedo_color = Color(0.34117648, 1, 0.48235294, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3eq8w"]
+material = SubResource("StandardMaterial3D_155ih")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3eq8w"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7307l"]
+albedo_color = Color(0.65834004, 0.6583399, 0.6583399, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_155ih"]
+material = SubResource("StandardMaterial3D_7307l")
+
 [node name="KS_4036" type="Node3D" unique_id=1781070975]
+script = ExtResource("3_fejio")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1705765396]
+environment = SubResource("Environment_44abe")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=977659]
 
 [node name="Resize" type="Node3D" parent="." unique_id=839295488]
-transform = Transform3D(-0.10237952, 0, -0.041346915, 0, 0.05, 0, -0.050144132, 0, 0.0844182, -0.04395163, 0, 0.035293713)
+transform = Transform3D(0.066, 0, 0, 0, 0.05, 0, 0, 0, 0.094, 0, 0.05, 0)
 
 [node name="Rigidbody" type="CharacterBody3D" parent="Resize" unique_id=941570093]
 
 [node name="Model" type="MeshInstance3D" parent="Resize/Rigidbody" unique_id=512385687]
 mesh = SubResource("BoxMesh_3eq8w")
+script = ExtResource("2_7307l")
+
+[node name="Label3D" type="Label3D" parent="Resize/Rigidbody/Model" unique_id=991062612]
+transform = Transform3D(15.151515, 0, 0, 0, 19.999996, 0, 0, 0, 10.638298, 0, 1.5, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "HELLO THERE"
+font_size = 8
+outline_size = 0
 
 [node name="Collider" type="CollisionShape3D" parent="Resize/Rigidbody" unique_id=696943983]
 shape = SubResource("BoxShape3D_3eq8w")
 debug_fill = false
 
-[node name="scripts" type="Node" parent="Resize/Rigidbody" unique_id=1178922955]
+[node name="code" type="Node" parent="Resize/Rigidbody" unique_id=1178922955]
 
-[node name="movement" type="Node" parent="Resize/Rigidbody/scripts" unique_id=1376230228 node_paths=PackedStringArray("character")]
+[node name="movement" type="Node" parent="Resize/Rigidbody/code" unique_id=1376230228 node_paths=PackedStringArray("character")]
 script = ExtResource("1_mufsq")
 character = NodePath("../..")
 
-[node name="input_keyboard" type="Node" parent="Resize/Rigidbody/scripts" unique_id=1685592588]
-script = ExtResource("2_64m6p")
+[node name="xr_input_relay" type="Node" parent="Resize/Rigidbody/code" unique_id=845313380 node_paths=PackedStringArray("left_hand", "right_hand", "label_debug")]
+script = ExtResource("4_7cxde")
+left_hand = NodePath("../../../../XROrigin3D/LeftHand")
+right_hand = NodePath("../../../../XROrigin3D/RightHand")
+label_debug = NodePath("../../Model/Label3D")
 
-[node name="Camera3D" type="Camera3D" parent="Resize" unique_id=1391171777]
-transform = Transform3D(15.151515, 0, 0, 0, 19.999998, 0, 0, 0, 10.638298, 0, 2.4976127, 3.0506425)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=977659]
+[node name="reset_position" type="Node" parent="Resize/Rigidbody/code" unique_id=1269516443 node_paths=PackedStringArray("left_hand", "what_to_move")]
+script = ExtResource("2_44abe")
+left_hand = NodePath("../../../../XROrigin3D/LeftHand")
+what_to_move = NodePath("../..")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=956272259]
 
@@ -53,5 +97,30 @@ min_value = -1.0
 max_value = 1.0
 step = 0.01
 
-[connection signal="value_changed" from="CanvasLayer/speed_set" to="Resize/Rigidbody/scripts/movement" method="set_joystick_forward"]
-[connection signal="value_changed" from="CanvasLayer/rotation_set" to="Resize/Rigidbody/scripts/movement" method="set_joystick_rotation"]
+[node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=2125273968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13339046, 0)
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=1602345216]
+
+[node name="LeftHand" type="XRController3D" parent="XROrigin3D" unique_id=727803063]
+transform = Transform3D(0.9999195, 0.012688203, 0, -0.012688203, 0.9999195, 0, 0, 0, 1, -0.25, 0, 0)
+tracker = &"left_hand"
+
+[node name="Hand_Glove_low_L" parent="XROrigin3D/LeftHand" unique_id=772929509 instance=ExtResource("4_155ih")]
+
+[node name="RightHand" type="XRController3D" parent="XROrigin3D" unique_id=247133837]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
+tracker = &"right_hand"
+
+[node name="Hand_Glove_low_R" parent="XROrigin3D/RightHand" unique_id=1703329530 instance=ExtResource("5_7307l")]
+
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=803025292]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_155ih")
+
+[connection signal="grip_left_is_down" from="Resize/Rigidbody/code/xr_input_relay" to="Resize/Rigidbody/code/reset_position" method="reset_position"]
+[connection signal="left_hand_joystick_update" from="Resize/Rigidbody/code/xr_input_relay" to="Resize/Rigidbody/code/movement" method="set_joystick_with_vector2"]
+[connection signal="right_hand_joystick_update" from="Resize/Rigidbody/code/xr_input_relay" to="Resize/Rigidbody/code/movement" method="set_joystick_with_vector2"]
+[connection signal="x_button_is_pressed" from="Resize/Rigidbody/code/xr_input_relay" to="Resize/Rigidbody/Model" method="color_change"]
+[connection signal="value_changed" from="CanvasLayer/speed_set" to="Resize/Rigidbody/code/movement" method="set_joystick_forward"]
+[connection signal="value_changed" from="CanvasLayer/rotation_set" to="Resize/Rigidbody/code/movement" method="set_joystick_rotation"]

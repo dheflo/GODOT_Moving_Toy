@@ -1,7 +1,7 @@
 extends Node
 
 @export var character : CharacterBody3D
-@export var max_speed_forward_in_mps : float = 2.5
+@export var max_speed_forward_in_mps : float = 1
 @export var max_rotation_in_degrees : float = 90
 @export_range(-1,1,0.01) var joystick_forward_intensity : float = 0
 @export_range(-1,1,0.01) var joystick_rotation_intensity : float = 0
@@ -10,6 +10,11 @@ extends Node
 func _ready() -> void:
 	if character == null:
 		push_warning("Where is my f*king characterbody3D ?")
+
+
+func set_joystick_with_vector2(joystick: Vector2) :
+	joystick_rotation_intensity = joystick.x
+	joystick_forward_intensity = joystick.y
 
 func set_joystick_forward(percentage : float) :
 	joystick_forward_intensity = percentage
