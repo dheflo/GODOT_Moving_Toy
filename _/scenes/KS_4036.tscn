@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dwrdxl1ubyl5i"]
 
 [ext_resource type="Script" uid="uid://clw0f4mon7nd1" path="res://_/scenes/ks4036_movement.gd" id="1_mufsq"]
+[ext_resource type="Script" uid="uid://dnktxlhp5jwyd" path="res://_/scenes/inputs_ks4036_relay.gd" id="2_64m6p"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3eq8w"]
 
@@ -20,13 +21,37 @@ mesh = SubResource("BoxMesh_3eq8w")
 shape = SubResource("BoxShape3D_3eq8w")
 debug_fill = false
 
-[node name="Scripts" type="Node" parent="Resize/Rigidbody" unique_id=1178922955]
+[node name="scripts" type="Node" parent="Resize/Rigidbody" unique_id=1178922955]
 
-[node name="Movement" type="Node" parent="Resize/Rigidbody/Scripts" unique_id=1376230228 node_paths=PackedStringArray("character")]
+[node name="movement" type="Node" parent="Resize/Rigidbody/scripts" unique_id=1376230228 node_paths=PackedStringArray("character")]
 script = ExtResource("1_mufsq")
 character = NodePath("../..")
+
+[node name="input_keyboard" type="Node" parent="Resize/Rigidbody/scripts" unique_id=1685592588]
+script = ExtResource("2_64m6p")
 
 [node name="Camera3D" type="Camera3D" parent="Resize" unique_id=1391171777]
 transform = Transform3D(15.151515, 0, 0, 0, 19.999998, 0, 0, 0, 10.638298, 0, 2.4976127, 3.0506425)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=977659]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=956272259]
+
+[node name="speed_set" type="HSlider" parent="CanvasLayer" unique_id=1856918055]
+anchors_preset = -1
+anchor_right = 1.0
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+
+[node name="rotation_set" type="HSlider" parent="CanvasLayer" unique_id=1351312374]
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 16.0
+offset_bottom = 32.0
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+
+[connection signal="value_changed" from="CanvasLayer/speed_set" to="Resize/Rigidbody/scripts/movement" method="set_joystick_forward"]
+[connection signal="value_changed" from="CanvasLayer/rotation_set" to="Resize/Rigidbody/scripts/movement" method="set_joystick_rotation"]
