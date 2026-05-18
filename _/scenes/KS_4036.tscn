@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dwrdxl1ubyl5i"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3eq8w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3eq8w"]
+
+[node name="KS_4036" type="Node3D" unique_id=1781070975]
+
+[node name="Resize" type="Node3D" parent="." unique_id=839295488]
+transform = Transform3D(0.066, 0, 0, 0, 0.05, 0, 0, 0, 0.094, 0, 0, 0)
+
+[node name="Rigidbody" type="RigidBody3D" parent="Resize" unique_id=712085081]
+
+[node name="Model" type="MeshInstance3D" parent="Resize/Rigidbody" unique_id=512385687]
+mesh = SubResource("BoxMesh_3eq8w")
+
+[node name="Collider" type="CollisionShape3D" parent="Resize/Rigidbody" unique_id=696943983]
+shape = SubResource("BoxShape3D_3eq8w")
+debug_fill = false
