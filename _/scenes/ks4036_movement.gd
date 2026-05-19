@@ -11,7 +11,6 @@ func _ready() -> void:
 	if character == null:
 		push_warning("Where is my f*king characterbody3D ?")
 
-
 func set_joystick_with_vector2(joystick: Vector2) :
 	joystick_rotation_intensity = joystick.x
 	joystick_forward_intensity = joystick.y

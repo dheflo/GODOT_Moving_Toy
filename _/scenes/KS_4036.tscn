@@ -1,12 +1,22 @@
 [gd_scene format=3 uid="uid://dwrdxl1ubyl5i"]
 
 [ext_resource type="Script" uid="uid://clw0f4mon7nd1" path="res://_/scenes/ks4036_movement.gd" id="1_mufsq"]
+[ext_resource type="Texture2D" uid="uid://d7nlflcl8l13" path="res://_/assets/meshes/ks_4036/3d/wheel/ks_4036_wheel_uv_color.png" id="2_4w6fu"]
 [ext_resource type="Script" uid="uid://c6o7iofo8wgbp" path="res://_/scenes/grip_car.gd" id="2_44abe"]
 [ext_resource type="Script" uid="uid://2j5itvvjda3p" path="res://_/scenes/color_change.gd" id="2_7307l"]
 [ext_resource type="Script" uid="uid://bih4y1pf800r5" path="res://_/scenes/xr_setup.gd" id="3_fejio"]
+[ext_resource type="Texture2D" uid="uid://boqrb1432pf6h" path="res://_/assets/meshes/ks_4036/2d/board.png" id="4_6ojxs"]
 [ext_resource type="Script" uid="uid://c5plgirpckkbh" path="res://_/scenes/xr_input_relay.gd" id="4_7cxde"]
 [ext_resource type="PackedScene" uid="uid://bnx4hithcij6y" path="res://addons/godot-xr-tools/hands/model/Hand_Glove_low_L.gltf" id="4_155ih"]
 [ext_resource type="PackedScene" uid="uid://csgsp0wuw8ucy" path="res://addons/godot-xr-tools/hands/model/Hand_Glove_low_R.gltf" id="5_7307l"]
+[ext_resource type="ArrayMesh" uid="uid://dfwvieaagj7g0" path="res://_/assets/meshes/ks_4036/3d/body/ks_4036_body.obj" id="5_l2xli"]
+[ext_resource type="ArrayMesh" uid="uid://dyxmwr46idk40" path="res://_/assets/meshes/ks_4036/3d/wheel/ks_4036_wheel.obj" id="6_e0em5"]
+[ext_resource type="ArrayMesh" uid="uid://dcp3drqm6juuu" path="res://_/assets/meshes/ks_4036/3d/top/ks_4036_top_platform.obj" id="7_l4ed7"]
+[ext_resource type="Texture2D" uid="uid://cvnbnjvu2i1e7" path="res://_/assets/meshes/ks_4036/3d/top/ks_4036_top_platform_uv_color.png" id="7_pd7tn"]
+[ext_resource type="Texture2D" uid="uid://dlpd8kadbxqu" path="res://_/assets/meshes/micro_bit_shape/3d/micro_bit_shape_uv_textured.png" id="9_e0em5"]
+[ext_resource type="ArrayMesh" uid="uid://b8j266buh42i5" path="res://_/assets/meshes/micro_bit_shape/3d/micro_bit_shape.obj" id="10_l4ed7"]
+[ext_resource type="Script" uid="uid://duu62q0ar8c4g" path="res://_/scenes/wheel_rotation_vertical.gd" id="11_6ojxs"]
+[ext_resource type="ArrayMesh" uid="uid://cle2gnxktb1fd" path="res://_/assets/meshes/ks_4036/3d/led/ks4036_front_led.obj" id="12_6ojxs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_155ih"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -20,11 +30,25 @@ background_mode = 2
 sky = SubResource("Sky_7307l")
 tonemap_mode = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_155ih"]
-albedo_color = Color(0.34117648, 1, 0.48235294, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ojxs"]
+albedo_texture = ExtResource("2_4w6fu")
 
-[sub_resource type="BoxMesh" id="BoxMesh_3eq8w"]
-material = SubResource("StandardMaterial3D_155ih")
+[sub_resource type="BoxMesh" id="BoxMesh_bm3kh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_osn1p"]
+albedo_texture = ExtResource("4_6ojxs")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2xli"]
+albedo_texture = ExtResource("7_pd7tn")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bm3kh"]
+albedo_texture = ExtResource("9_e0em5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyulw"]
+albedo_texture = ExtResource("2_4w6fu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_accqv"]
+albedo_texture = ExtResource("2_4w6fu")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3eq8w"]
 
@@ -43,20 +67,71 @@ environment = SubResource("Environment_44abe")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=977659]
 
 [node name="Resize" type="Node3D" parent="." unique_id=839295488]
-transform = Transform3D(0.066, 0, 0, 0, 0.05, 0, 0, 0, 0.094, 0, 0.05, 0)
 
 [node name="Rigidbody" type="CharacterBody3D" parent="Resize" unique_id=941570093]
 
 [node name="Model" type="MeshInstance3D" parent="Resize/Rigidbody" unique_id=512385687]
-mesh = SubResource("BoxMesh_3eq8w")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_6ojxs")
 script = ExtResource("2_7307l")
 
 [node name="Label3D" type="Label3D" parent="Resize/Rigidbody/Model" unique_id=991062612]
 transform = Transform3D(15.151515, 0, 0, 0, 19.999996, 0, 0, 0, 10.638298, 0, 1.5, 0)
+visible = false
 outline_modulate = Color(0, 0, 0, 0)
 text = "HELLO THERE"
 font_size = 8
 outline_size = 0
+
+[node name="dimension" type="Node3D" parent="Resize/Rigidbody/Model" unique_id=1677617995]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -0.33328176, 0)
+
+[node name="size ref cube" type="MeshInstance3D" parent="Resize/Rigidbody/Model/dimension" unique_id=861469032]
+transform = Transform3D(0.066, 0, 0, 0, 0.05, 0, 0, 0, 0.094, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_bm3kh")
+
+[node name="body" type="MeshInstance3D" parent="Resize/Rigidbody/Model/dimension" unique_id=1423418018]
+material_override = SubResource("StandardMaterial3D_osn1p")
+mesh = ExtResource("5_l2xli")
+
+[node name="top" type="MeshInstance3D" parent="Resize/Rigidbody/Model/dimension" unique_id=1849389279]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02470994, 0)
+material_override = SubResource("StandardMaterial3D_l2xli")
+mesh = ExtResource("7_l4ed7")
+
+[node name="microbit" type="MeshInstance3D" parent="Resize/Rigidbody/Model/dimension" unique_id=1601219590]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.0009091133, 0.029407024, -0.03261693)
+material_override = SubResource("StandardMaterial3D_bm3kh")
+mesh = ExtResource("10_l4ed7")
+
+[node name="led_right" type="MeshInstance3D" parent="Resize/Rigidbody/Model/dimension" unique_id=970662410]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.020405143, 0.0044392943, -0.042013034)
+mesh = ExtResource("12_6ojxs")
+
+[node name="led_left" type="MeshInstance3D" parent="Resize/Rigidbody/Model/dimension" unique_id=1795093362]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.02055996, 0.0044392943, -0.042013034)
+mesh = ExtResource("12_6ojxs")
+
+[node name="wheels" type="Node3D" parent="Resize/Rigidbody/Model/dimension" unique_id=512687785]
+
+[node name="pivot_left" type="Node3D" parent="Resize/Rigidbody/Model/dimension/wheels" unique_id=1092514670 node_paths=PackedStringArray("pivot")]
+script = ExtResource("11_6ojxs")
+pivot = NodePath(".")
+
+[node name="wheel_left" type="MeshInstance3D" parent="Resize/Rigidbody/Model/dimension/wheels/pivot_left" unique_id=1871190771]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.029649928, 0, 0)
+material_override = SubResource("StandardMaterial3D_jyulw")
+mesh = ExtResource("6_e0em5")
+
+[node name="pivot_right" type="Node3D" parent="Resize/Rigidbody/Model/dimension/wheels" unique_id=1706429427 node_paths=PackedStringArray("pivot")]
+script = ExtResource("11_6ojxs")
+pivot = NodePath(".")
+
+[node name="wheel_right" type="MeshInstance3D" parent="Resize/Rigidbody/Model/dimension/wheels/pivot_right" unique_id=1061160813]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02957108, 0, 0)
+material_override = SubResource("StandardMaterial3D_accqv")
+mesh = ExtResource("6_e0em5")
 
 [node name="Collider" type="CollisionShape3D" parent="Resize/Rigidbody" unique_id=696943983]
 shape = SubResource("BoxShape3D_3eq8w")
@@ -120,7 +195,9 @@ mesh = SubResource("PlaneMesh_155ih")
 
 [connection signal="grip_left_is_down" from="Resize/Rigidbody/code/xr_input_relay" to="Resize/Rigidbody/code/reset_position" method="reset_position"]
 [connection signal="left_hand_joystick_update" from="Resize/Rigidbody/code/xr_input_relay" to="Resize/Rigidbody/code/movement" method="set_joystick_with_vector2"]
+[connection signal="left_joystick_percent" from="Resize/Rigidbody/code/xr_input_relay" to="Resize/Rigidbody/Model/dimension/wheels/pivot_left" method="_set_rotation_percent"]
 [connection signal="right_hand_joystick_update" from="Resize/Rigidbody/code/xr_input_relay" to="Resize/Rigidbody/code/movement" method="set_joystick_with_vector2"]
+[connection signal="right_joystick_percent" from="Resize/Rigidbody/code/xr_input_relay" to="Resize/Rigidbody/Model/dimension/wheels/pivot_right" method="_set_rotation_percent"]
 [connection signal="x_button_is_pressed" from="Resize/Rigidbody/code/xr_input_relay" to="Resize/Rigidbody/Model" method="color_change"]
 [connection signal="value_changed" from="CanvasLayer/speed_set" to="Resize/Rigidbody/code/movement" method="set_joystick_forward"]
 [connection signal="value_changed" from="CanvasLayer/rotation_set" to="Resize/Rigidbody/code/movement" method="set_joystick_rotation"]
